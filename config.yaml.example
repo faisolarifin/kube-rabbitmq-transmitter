@@ -1,0 +1,37 @@
+rabbitmq:
+  host: "localhost"
+  port: 5672
+  username: "guest"
+  password: "guest"
+  vhost: "/"
+  queue_name: "webhook_queue"
+  exchange: "webhook_exchange"
+  routing_key: "webhook.events"
+  prefetch_count: 50          # Number of messages to prefetch
+  prefetch_global: true       # Global prefetch (applies to entire connection)
+  auto_ack: false            # Manual ACK/NACK for message safety
+  max_workers: 10            # Maximum concurrent workers
+  worker_timeout: 30         # Worker timeout in seconds
+  max_retries: 3             # Maximum retry attempts for failed messages
+  retry_delay: 1000          # Delay between retries in milliseconds
+
+http:
+  timeout: 30
+  retry_attempts: 3
+  retry_delay: 1000
+  user_agent: "rabbitmq-consumer/1.0"
+
+auth:
+  login_endpoint: "/api/auth/login"
+  token_cache_duration: 3600
+  credentials:
+    "http://client1.example.com":
+      username: "client1_user"
+      password: "client1_pass"
+    "http://client2.example.com":
+      username: "client2_user" 
+      password: "client2_pass"
+
+logging:
+  level: "info"
+  format: "json"

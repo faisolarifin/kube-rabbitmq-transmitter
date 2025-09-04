@@ -1,0 +1,1 @@
+{"timestamp":"2025-09-04T17:02:11.197125Z","level":"ERROR","fields":{"message":"{\"message\":{\"error\":\"Application startup test - this is a test error to verify logging works correctly\"},\"timestamp\":\"2025-09-05 00:02:11.195\",\"uniqueId\":\"startup-test\",\"x-request-id\":\"main-startup\"}"},"target":"rabbitmq_consumer::providers::logging"}

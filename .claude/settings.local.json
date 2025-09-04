@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/D:\\Rust\\test-kube\\src\\services/**)",
+      "Bash(cargo check:*)",
+      "Read(/D:\\Rust\\test-kube\\src\\services/**)",
+      "Bash(cargo test)",
+      "Bash(cargo:*)",
+      "Bash(timeout 5 cargo run)",
+      "Read(/D:\\Rust\\test-kube\\src\\config/**)",
+      "Read(/D:\\Rust\\test-kube\\src\\utils/**)",
+      "Bash(timeout:*)",
+      "Read(/D:\\Rust\\test-kube\\src\\models/**)",
+      "Read(/D:\\Rust\\test-kube\\src\\providers/**)",
+      "Read(/D:\\Rust\\test-kube\\src\\providers/**)",
+      "Read(/D:\\Rust\\test-kube\\src\\config/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

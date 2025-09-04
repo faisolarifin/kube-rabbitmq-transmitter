@@ -1,0 +1,37 @@
+amqp:
+  scheme: "amqp"
+  host: localhost
+  port: 5672
+  username: guest
+  password: guest
+  concurrent: 100 # number of concurrent consumers per queue, number must be <= prefetch_count
+  prefetch_count: 100
+  prefetch_size: 0
+  global: false
+  queue_name: "webhook_queue"
+
+logger:
+  dir: log/error/                    
+  file_name: custom-gateway
+  max_backups: 0                            # set 0 for unlimited backups
+  max_size: 10                              # in mb
+  max_age: 90                               # in days, set 0 for unlimited days
+  compress: true
+  local_time: true
+
+http:
+  timeout: 30
+  retry_attempts: 3
+  retry_delay: 1000
+  user_agent: "rabbitmq-consumer/1.0"
+
+auth:
+  login_endpoint: "/api/auth/login"
+  token_cache_duration: 3600
+  credentials:
+    "http://client1.example.com":
+      username: "client1_user"
+      password: "client1_pass"
+    "http://client2.example.com":
+      username: "client2_user" 
+      password: "client2_pass"

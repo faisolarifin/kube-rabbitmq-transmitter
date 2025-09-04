@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - app-network
+
+  rabbitmq-consumer:
+    build: .
+    container_name: rabbitmq-consumer
+    depends_on:
+      - rabbitmq
+    environment:
+      - APP_RABBITMQ__HOST=rabbitmq
+      - APP_RABBITMQ__PORT=5672
+      - APP_RABBITMQ__USERNAME=guest
+      - APP_RABBITMQ__PASSWORD=guest
+      - APP_LOGGING__LEVEL=info
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # Mock webhook server for testing
+  webhook-server:
+    image: nginx:alpine
+    container_name: webhook-server
+    ports:
+      - "8080:80"
+    volumes:
+      - ./tests/mock-webhook.html:/usr/share/nginx/html/index.html:ro
+    networks:
+      - app-network
+
+volumes:
+  rabbitmq_data:
+
+networks:
+  app-network:
+    driver: bridge
